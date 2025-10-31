@@ -1,9 +1,13 @@
 import random
 
-skill = int(input("Hello! Tell me what skill level you are at.\n\n"))
-practice = int(input("Now tell me what kind of workout you did...\n" \
-"Enter '1' if it was a gym visit, or '0' if it was a home " \
-"reflex bar workout.\n\n"))
+# skill = int(input("\nHello! Tell me what skill level you are at.\n\n"))
+# practice = int(input("Now tell me what kind of workout you did...\n" \
+# "Enter '1' if it was a gym visit, or '0' if it was a home " \
+# "reflex bar workout.\n\n"))
+
+print("\n")
+skill = int(input("Hello! Tell me what skill level you are at: "))
+print(textwrap.fill(text, width=60))
 
 percentage = 100-skill
 chance = random.randint(0, 100)
