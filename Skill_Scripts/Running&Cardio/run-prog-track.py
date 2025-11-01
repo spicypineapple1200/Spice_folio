@@ -110,14 +110,14 @@ print("---Swim Requirements---\n")
 swim_time = swim_time(miles, speed)
 print(f"Complete a {swim_time} minute swim.\n\n")
 
-print("---Biking Requirements---\n")
+print("----BIKING REQUIREMENTS----\n")
 text = "For biking you have two options. Either outdoor biking or stationary biking."
 print(textwrap.fill(text, width=60))
 
-print("\nFor outdoor biking...\n")
+print("\n--OUTDOOR BIKING--\n")
 bike_distance, bike_level = bike_reqs(miles, speed)
 print(f"Complete a {bike_distance} mile bike ride.\n")
-print("\nFor stationary biking...\n")
+print("\n--STATIONARY BIKING--\n")
 print(f"Bike for {bike_distance} miles, with a level of {bike_level}.\n")
 
 print("Get out there and TRAIN!")
