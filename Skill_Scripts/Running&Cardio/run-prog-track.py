@@ -29,7 +29,7 @@ def rank(goal):
     return miles, speed, x_miles, x_speed
 
 def swim_time(miles, speed):
-    swim_time = int(round(((miles*10)/1.5)+speed, 0))
+    swim_time = int(round(((miles*10)/1.25)+speed, 0))
     return swim_time
 
 def bike_reqs(miles, speed):
@@ -74,21 +74,18 @@ if statement:
 
 # WORKING version of the script, to be commenting out while testing
 print("\n")
-level = int(input("Anyways, what skill level are you at?: "))
+level = input("Anyways, what skill level are you at?: ")
 print("\n")
 
-if level >= 0 and level <=100:
-    pass
-else:
-    levels = [i for i in range(100)]
-    while level not in levels:
-        text = "Only inputs of 0 to 100 are accepted. Let's try this again. *sigh*\n"
-        print(textwrap.fill(text, width=60))
-        print("\n")
-        level = int(input("Anyways, what skill level are you at?: "))
-        print("\n")
-        if level >= 0 or level <= 100:
-            break
+levels = [str(i) for i in range(101)]
+while level not in levels:
+    print("Only inputs of 0 to 100 are accepted. Let's try this again. *sigh*\n")
+    print("\n")
+    level = input("Anyways, what skill level are you at?: ")
+    print("\n")
+    if level in levels:
+        break
+level = int(level)
 # ---------------------
 
 # TESTING portion of the script, to be commenting out in the working version
@@ -123,19 +120,20 @@ if statement:
 print("\n")
 print("---------ALTERNATIVE CARDIO---------\n")
 
-print("---Swim Requirements---\n")
+print("\n----SWIM REQUIREMENTS----\n")
 swim_time = swim_time(miles, speed)
 print(f"Complete a {swim_time} minute swim.\n\n")
 
-print("----BIKING REQUIREMENTS----\n")
+print("\n----BIKING REQUIREMENTS----\n")
 text = "For biking you have two options. Either outdoor biking or stationary biking."
 print(textwrap.fill(text, width=60))
 
-print("\n--OUTDOOR BIKING--\n")
 bike_distance, bike_level = bike_reqs(miles, speed)
-print(f"Complete a {bike_distance} mile bike ride.\n")
-print("\n--STATIONARY BIKING--\n")
+
+print("\n\n\n--STATIONARY BIKING--\n")
 print(f"Bike for {bike_distance} miles, with a level of {bike_level}.\n")
+print("\n--OUTDOOR BIKING--\n")
+print(f"Complete a {bike_distance} mile bike ride.\n")
 
 print("Get out there and TRAIN!")
 
