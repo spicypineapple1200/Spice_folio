@@ -76,6 +76,19 @@ if statement:
 print("\n")
 level = int(input("Anyways, what skill level are you at?: "))
 print("\n")
+
+if level >= 0 and level <=100:
+    pass
+else:
+    levels = [i for i in range(100)]
+    while level not in levels:
+        text = "Only inputs of 0 to 100 are accepted. Let's try this again. *sigh*\n"
+        print(textwrap.fill(text, width=60))
+        print("\n")
+        level = int(input("Anyways, what skill level are you at?: "))
+        print("\n")
+        if level >= 0 or level <= 100:
+            break
 # ---------------------
 
 # TESTING portion of the script, to be commenting out in the working version
@@ -94,8 +107,12 @@ print(f"You are currently at level {level}, meaning you currently run...\n")
 miles, speed, r_miles, r_speed = rank(level)
 print(f"{miles} miles.\n{speed} miles per hour.\n1.0 incline.\n\n")
 
-print(f"To reach level {level+1} you need to run...\n")
-print(f"{r_miles} miles.\n{r_speed} miles per hour.\n1.0 incline.\n")
+if level == 100:
+    text = "Looks like you have completed our program and achieved 100 points. Congratulations! Your alternative cardio options are still listed below."
+    print(textwrap.fill(text, width=60))
+else:
+    print(f"To reach level {level+1} you need to run...\n")
+    print(f"{r_miles} miles.\n{r_speed} miles per hour.\n1.0 incline.\n")
 
 if statement:
     text = "Now for alternative cardio! When you need a break from your running journey, these workout parameters can be followed to give you a workout on par with your current training level. Your options are...swimming and biking! These are optional and can be ignored if you dislike either of those activities."
