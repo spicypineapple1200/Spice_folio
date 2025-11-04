@@ -45,8 +45,18 @@ statement = input("Do you want the intro/long text messages? If so enter \"y\", 
 
 if statement == "y":
     statement = True
-else:
+elif statement == "n":
     statement = False
+else:
+    while statement != True or statement != False:
+        print("\nEvidently your struggling. Darling, a \"y\" or an \"n\" only please! Focus now.\n")
+        statement = input("Do you want the intro/long text messages? If so enter \"y\", if not enter \"n\": ")
+        if statement == "y":
+            statement = True
+            break
+        elif statement == "n":
+            statement = False
+            break
 
 if statement:
     print("\n")
