@@ -1,10 +1,7 @@
 import textwrap
 
-def current(goal):
-    points = 0
-    miles = 1.0
-    speed = 5.0
-    switch = True
+def rank(goal):
+    points, miles, speed, switch = 0, 1.0, 5.0, True
     while points < goal:
         points+=1
         if switch:
@@ -16,26 +13,20 @@ def current(goal):
         else:pass
         if points%20 == 0: switch = not switch
         else: pass
-    return miles, speed
-
-def rank_up(goal):
     goal+=1
-    points = 0
-    miles = 1.0
-    speed = 5.0
-    switch = True
-    while points < goal:
-        points+=1
-        if switch:
-            miles+=0.1
-            miles = round(miles, 1)
-        elif not switch:
-            speed+=0.1
-            speed = round(speed, 1)
+    x_points, x_miles, x_speed, x_switch = 0, 1.0, 5.0, True
+    while x_points < goal:
+        x_points+=1
+        if x_switch:
+            x_miles+=0.1
+            x_miles = round(x_miles, 1)
+        elif not x_switch:
+            x_speed+=0.1
+            x_speed = round(x_speed, 1)
         else:pass
-        if points%20 == 0: switch = not switch
+        if x_points%20 == 0: x_switch = not x_switch
         else: pass
-    return miles, speed
+    return miles, speed, x_miles, x_speed
 
 def swim_time(miles, speed):
     swim_time = int(round(((miles/speed)*60), 0))
@@ -90,11 +81,10 @@ print("\n")
 print("---------RANKING UP---------\n")
 
 print(f"You are currently at level {level}, meaning you currently run...\n")
-miles, speed = current(level)
+miles, speed, r_miles, r_speed = rank(level)
 print(f"{miles} miles.\n{speed} miles per hour.\n1.0 incline.\n\n")
 
 print(f"To reach level {level+1} you need to run...\n")
-r_miles, r_speed = rank_up(level)
 print(f"{r_miles} miles.\n{r_speed} miles per hour.\n1.0 incline.\n")
 
 if statement:
@@ -121,3 +111,4 @@ print("\n--STATIONARY BIKING--\n")
 print(f"Bike for {bike_distance} miles, with a level of {bike_level}.\n")
 
 print("Get out there and TRAIN!")
+
