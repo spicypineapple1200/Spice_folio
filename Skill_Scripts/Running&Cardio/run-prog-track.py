@@ -29,7 +29,7 @@ def rank(goal):
     return miles, speed, x_miles, x_speed
 
 def swim_time(miles, speed):
-    swim_time = int(round(((miles*10)/1.25)+speed, 0))
+    swim_time = int(round((miles*11.5)+speed, 0))
     return swim_time
 
 def bike_reqs(miles, speed):
@@ -136,4 +136,3 @@ print("\n--OUTDOOR BIKING--\n")
 print(f"Complete a {bike_distance} mile bike ride.\n")
 
 print("Get out there and TRAIN!")
-
