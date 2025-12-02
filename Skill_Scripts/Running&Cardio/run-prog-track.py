@@ -13,20 +13,7 @@ def rank(goal):
         else:pass
         if points%20 == 0: switch = not switch
         else: pass
-    goal+=1
-    x_points, x_miles, x_speed, x_switch = 0, 1.0, 5.0, True
-    while x_points < goal:
-        x_points+=1
-        if x_switch:
-            x_miles+=0.1
-            x_miles = round(x_miles, 1)
-        elif not x_switch:
-            x_speed+=0.1
-            x_speed = round(x_speed, 1)
-        else:pass
-        if x_points%20 == 0: x_switch = not x_switch
-        else: pass
-    return miles, speed, x_miles, x_speed
+    return miles, speed
 
 def swim_time(miles, speed):
     swim_time = int(round((miles*11.5)+speed, 0))
@@ -60,79 +47,89 @@ else:
 
 if statement:
     print("\n")
-    text = "Welcome to run-track-prog, a script designed to help you keep track of your running and alternative cardio training progress. The program begins at 0 points where the minimum requirement is to run....\n"
+    text = "Welcome to run-track-prog, a script designed to help you keep track of your endurance training progress. The program begins at 0 points where the minimum requirement is to complete the following..."
     print(textwrap.fill(text, width=60))
-    print("\n1.0 miles\n5.0 miles per hour\n1.0 incline\n")
+    print("\nRun...\n1.0 miles\n5.0 miles per hour\n1.0 incline\n")
+    print("Swim...\n16 minutes\n")
+    print("Bike...\n3.0 miles\nDifficulty Level 5\n")
     
-    text = "When you can complete the above, the program begins! The program is designed for you to complete anywhere from 1 to 2 runs a week. After each run the parameters, either the distance or the speed, will be incrementally increased. You can of course remain at a certain difficulty level if you wish. ALWAYS remember to listen to your body.\n"
+    text = "The program is designed for you to complete the run, swim, and bike requirements to move to the next level. Ideally, the three events are all done in a week but to each his own. This is at your own pace. ALWAYS remember to listen to your body.\n"
     print(textwrap.fill(text, width=60))
     
     print("\n"+("-"*60)+"\n")
     
-    level = ("What skill level are you at currently? I will let you know what your parameters are, what parameters you need to get to the next level, and what your alternative cardio options are. The program is designed for you to rank up ONLY from your runs, with the alternative cardio options used as fill ins so you are not running too much.")
-    print(textwrap.fill(text, width=60))
+    level = ("What skill level are you at currently? I will let you know what your three challenges are in order to get to the next level.")
 
-# WORKING version of the script, to be commenting out while testing
-print("\n")
-level = input("Anyways, what skill level are you at?: ")
+level = input("So, what skill level are you at?: ")
 print("\n")
 
 levels = [str(i) for i in range(101)]
 while level not in levels:
     print("Only inputs of 0 to 100 are accepted. Let's try this again. *sigh*\n")
     print("\n")
-    level = input("Anyways, what skill level are you at?: ")
+    level = input("So, what skill level are you at?: ")
     print("\n")
     if level in levels:
         break
 level = int(level)
-# ---------------------
 
-# TESTING portion of the script, to be commenting out in the working version
-# text = "Anyways, what skill level are you at?: "
-# print("\n")
+check_up = input(f"You are currently at level {level}, Would you like to see your current stats? Enter a \"y\" or an \"n\": ")
 
-# level = 99
+if check_up == "y":
+    check_up = True
+elif check_up == "n":
+    check_up = False
+else:
+    while check_up != True or check_up != False:
+        print("\nCome on now fam. A \"y\" or an \"n\" only please! Focus now.\n")
+        check_up = input("Would you like to see your current stats?: ")
+        if check_up == "y":
+            check_up = True
+            break
+        elif check_up == "n":
+            check_up = False
+            break
+if check_up:
+    print(f"\nLevel {level}. Below are your stats...\n")
+    # run
+    miles, speed = rank(level)
+    print(f"Run...\n{miles} miles.\n{speed} miles per hour.\n1.0 incline.\n")
+    # swim
+    my_swim_time = swim_time(miles, speed)
+    print(f"Swim...\n{my_swim_time} minutes\n")
+    # bike
+    bike_distance, bike_level = bike_reqs(miles, speed)
+    print(f"Bike...\n{bike_distance} miles\nDifficulty Level {bike_level}\n")
+else:
+    print("\n")
 
-# print(textwrap.fill(text, width=60))
-# print("\n")
-# ---------------------
-
-print("---------RANKING UP---------\n")
-
-print(f"You are currently at level {level}, meaning you currently run...\n")
-miles, speed, r_miles, r_speed = rank(level)
-print(f"{miles} miles.\n{speed} miles per hour.\n1.0 incline.\n\n")
+print(("-"*25)+"RANKING UP"+("-"*25)+"\n")
 
 if level == 100:
-    text = "Looks like you have completed our program and achieved 100 points. Congratulations! Your alternative cardio options are still listed below."
+    text = "Looks like you have completed our program and achieved 100 points. Congratulations!"
     print(textwrap.fill(text, width=60))
+    if not check_up:
+        print(f"\nCongrats again on {level}. Below are your stats...\n")
+        # run
+        miles, speed = rank(level)
+        print(f"Run...\n{miles} miles.\n{speed} miles per hour.\n1.0 incline.\n")
+        # swim
+        my_swim_time = swim_time(miles, speed)
+        print(f"Swim...\n{my_swim_time} minutes\n")
+        # bike
+        bike_distance, bike_level = bike_reqs(miles, speed)
+        print(f"Bike...\n{bike_distance} miles\nDifficulty Level {bike_level}\n")
 else:
-    print(f"To reach level {level+1} you need to run...\n")
-    print(f"{r_miles} miles.\n{r_speed} miles per hour.\n1.0 incline.\n")
+    level+=1
+    print(f"To get to Level {level}. You must accomplish the following...\n")
+    # run
+    miles, speed = rank(level)
+    print(f"Run...\n{miles} miles.\n{speed} miles per hour.\n1.0 incline.\n")
+    # swim
+    my_swim_time = swim_time(miles, speed)
+    print(f"Swim...\n{my_swim_time} minutes\n")
+    # bike
+    bike_distance, bike_level = bike_reqs(miles, speed)
+    print(f"Bike...\n{bike_distance} miles\nDifficulty Level {bike_level}\n")
 
-if statement:
-    text = "Now for alternative cardio! When you need a break from your running journey, these workout parameters can be followed to give you a workout on par with your current training level. Your options are...swimming and biking! These are optional and can be ignored if you dislike either of those activities."
-    print(textwrap.fill(text, width=60))
-
-# ---------------------
-
-print("\n")
-print("---------ALTERNATIVE CARDIO---------\n")
-
-print("\n----SWIM REQUIREMENTS----\n")
-swim_time = swim_time(miles, speed)
-print(f"Complete a {swim_time} minute swim.\n\n")
-
-print("\n----BIKING REQUIREMENTS----\n")
-text = "For biking you have two options. Either outdoor biking or stationary biking."
-print(textwrap.fill(text, width=60))
-
-bike_distance, bike_level = bike_reqs(miles, speed)
-
-print("\n\n\n--STATIONARY BIKING--\n")
-print(f"Bike for {bike_distance} miles, with a level of {bike_level}.\n")
-print("\n--OUTDOOR BIKING--\n")
-print(f"Complete a {bike_distance} mile bike ride.\n")
-
-print("Get out there and TRAIN!")
+print("\nGet out there and TRAIN!")
