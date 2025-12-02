@@ -1,18 +1,11 @@
 import textwrap
 
 def rank(goal):
-    points, miles, speed, switch = 0, 1.0, 5.0, True
-    while points < goal:
-        points+=1
-        if switch:
-            miles+=0.1
-            miles = round(miles, 1)
-        elif not switch:
-            speed+=0.1
-            speed = round(speed, 1)
-        else:pass
-        if points%20 == 0: switch = not switch
-        else: pass
+    miles, speed= 1.0, 5.0
+    for count in range(goal):
+        miles = round(miles+0.04, 2)
+        speed = round(speed+0.05, 2)
+    speed = round(speed, 1)
     return miles, speed
 
 def swim_time(miles, speed):
