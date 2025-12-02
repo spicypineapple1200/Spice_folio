@@ -1,24 +1,36 @@
 import random
 
-# skill = int(input("\nHello! Tell me what skill level you are at.\n\n"))
-# practice = int(input("Now tell me what kind of workout you did...\n" \
-# "Enter '1' if it was a gym visit, or '0' if it was a home " \
-# "reflex bar workout.\n\n"))
-
 print("\n")
-skill = int(input("Hello! Tell me what skill level you are at: "))
-print(textwrap.fill(text, width=60))
+level = int(input("Hello! Tell me what skill level you are at: "))
+
+levels = [number for number in range(101)]
+while level not in levels:
+    print("Only inputs of 0 to 100 are accepted. Let's try this again. *sigh*\n")
+    level = int(input("So, what skill level are you at?: "))
+    if level in levels:
+        break
+skill = int(level)
+
+practice = input("Did you put out at the gym today? Be honest.\n" \
+"Enter 'y' if so, or 'n' if not: ")
+checks = ['y', 'n']
+while practice not in checks:
+    print("Bad input.\n")
+    practice = input("Enter 'y' or 'n', no other input is valid: ")
+    print("\n")
+    if practice in checks:
+        break
 
 percentage = 100-skill
 chance = random.randint(0, 100)
 print(f"\nYour chance roll is...{chance}.")
-if chance > percentage and practice == 1:
+if chance > percentage and practice == 'y':
     chance = random.randint(0, 100)
-    print("\nSecond try, just cuz you got that ass up and went to the gym...")
+    print("\nSecond try, just cuz you put out while at the gym today...")
     print(f"Your chance roll is...{chance}.\n")
 
 if chance <= percentage:
-    ruling = f"Skill up by one. Congrats! Your skill in boxing is now {skill+1}.\n"
+    ruling = f"Skill up by one. Congrats! Your skill level is now {skill+1}.\n"
 else:
     ruling = f"No skill up this time. Keep training though. Your skill level remains at {skill}.\n"
 
