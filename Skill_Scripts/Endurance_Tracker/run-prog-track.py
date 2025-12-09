@@ -9,7 +9,7 @@ def rank(goal):
     return miles, speed
 
 def swim_time(miles, speed):
-    my_swim_time = int(round((miles*16)+speed, 0))
+    my_swim_time = int(round((miles*7)+speed, 0))
     return my_swim_time
 
 def bike_reqs(miles, speed):
